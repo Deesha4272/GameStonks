@@ -1,0 +1,19 @@
+h5 {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    background-color: transparent;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    background: transparent;
+  }
+.dash {
+    background: transparent;
+}
+.line {
+    
+    background: transparent;
+  }
