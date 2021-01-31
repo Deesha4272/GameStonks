@@ -56,8 +56,8 @@ type DataApiServicer interface {
 // while the service implementation can ignored with the .openapi-generator-ignore file 
 // and updated with the logic required for the API.
 type StockApiServicer interface { 
-	AddNewComment(context.Context, string) (ImplResponse, error)
-	AddNewVote(context.Context, string) (ImplResponse, error)
+	AddNewComment(context.Context, string, string, string) (ImplResponse, error)
+	AddNewVote(context.Context, string, string) (ImplResponse, error)
 	GetAllStocks(context.Context, string, string) (ImplResponse, error)
 	GetIndividualStock(context.Context, string) (ImplResponse, error)
 	InsertIndividualStock(context.Context, string) (ImplResponse, error)

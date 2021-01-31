@@ -10,10 +10,9 @@
 package main
 
 import (
+	openapi "github.com/adchungcsc/GameStonks/go"
 	"log"
 	"net/http"
-
-	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/go"
 )
 
 func main() {

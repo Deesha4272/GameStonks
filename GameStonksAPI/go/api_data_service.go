@@ -11,8 +11,8 @@ package openapi
 
 import (
 	"context"
-	"net/http"
 	"errors"
+	"net/http"
 )
 
 // DataApiService is a service that implents the logic for the DataApiServicer
@@ -33,6 +33,7 @@ func (s *DataApiService) GetMostVoted(ctx context.Context, voteFloor string, sin
 
 	//TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
 	//return Response(200, nil),nil
+
 
 	//TODO: Uncomment the next line to return response Response(404, {}) or use other options such as http.Ok ...
 	//return Response(404, nil),nil

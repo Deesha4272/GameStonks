@@ -10,7 +10,6 @@
 package openapi
 
 import (
-	// "encoding/json"
 	"net/http"
 	"strings"
 
@@ -33,31 +32,31 @@ func (c *StockApiController) Routes() Routes {
 		{
 			"AddNewComment",
 			strings.ToUpper("Put"),
-			"/adchungcsc/gamestonks/1.0.0/stock/comment/{stock_ticker}",
+			"/api/stock/comment/{stock_ticker}",
 			c.AddNewComment,
 		},
 		{
 			"AddNewVote",
 			strings.ToUpper("Put"),
-			"/adchungcsc/gamestonks/1.0.0/stock/vote/{stock_ticker}",
+			"/api/stock/vote/{stock_ticker}",
 			c.AddNewVote,
 		},
 		{
 			"GetAllStocks",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/stocks",
+			"/api/stocks",
 			c.GetAllStocks,
 		},
 		{
 			"GetIndividualStock",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/stock/{stock_ticker}",
+			"/api/stock/{stock_ticker}",
 			c.GetIndividualStock,
 		},
 		{
 			"InsertIndividualStock",
 			strings.ToUpper("Post"),
-			"/adchungcsc/gamestonks/1.0.0/stock/{stock_ticker}",
+			"/api/stock/{stock_ticker}",
 			c.InsertIndividualStock,
 		},
 	}
@@ -65,9 +64,12 @@ func (c *StockApiController) Routes() Routes {
 
 // AddNewComment - Add a comment to a stock
 func (c *StockApiController) AddNewComment(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
 	params := mux.Vars(r)
 	stockTicker := params["stock_ticker"]
-	result, err := c.service.AddNewComment(r.Context(), stockTicker)
+	comment := query.Get("comment")
+	commenter := query.Get("commenter")
+	result, err := c.service.AddNewComment(r.Context(), stockTicker, comment, commenter)
 	//If an error occured, encode the error with the status code
 	if err != nil {
 		EncodeJSONResponse(err.Error(), &result.Code, w)
@@ -80,9 +82,12 @@ func (c *StockApiController) AddNewComment(w http.ResponseWriter, r *http.Reques
 
 // AddNewVote - Add a vote to a stock
 func (c *StockApiController) AddNewVote(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
 	params := mux.Vars(r)
 	stockTicker := params["stock_ticker"]
-	result, err := c.service.AddNewVote(r.Context(), stockTicker)
+	voter := query.Get("voter")
+
+	result, err := c.service.AddNewVote(r.Context(), stockTicker, voter)
 	//If an error occured, encode the error with the status code
 	if err != nil {
 		EncodeJSONResponse(err.Error(), &result.Code, w)

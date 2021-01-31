@@ -10,8 +10,12 @@
 package openapi
 
 import (
+	"context"
 	"encoding/json"
+	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v4/pgxpool"
 	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -36,8 +40,26 @@ type Router interface {
 	Routes() Routes
 }
 
+var databaseConnection *pgxpool.Pool
+
+func databaseConnect() {
+	connStr :=  os.Getenv("db")
+	config, err := pgxpool.ParseConfig(connStr)
+	if err != nil {
+		log.Fatal("error configuring the database: ", err)
+	}
+	config.AfterConnect = func(ctx context.Context, conn *pgx.Conn) error {
+		//no need to do anything with a new connection added to the pool.
+		return nil
+	}
+
+	databaseConnection, err = pgxpool.ConnectConfig(context.Background(), config)
+}
+
+
 // NewRouter creates a new router for any number of api routers
 func NewRouter(routers ...Router) *mux.Router {
+	databaseConnect()
 	router := mux.NewRouter().StrictSlash(true)
 	for _, api := range routers {
 		for _, route := range api.Routes() {

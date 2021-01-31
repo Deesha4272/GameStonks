@@ -33,31 +33,31 @@ func (c *DataApiController) Routes() Routes {
 		{
 			"GetMostVoted",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/data/most_voted",
+			"/api/data/most_voted",
 			c.GetMostVoted,
 		},
 		{
 			"GetStockCommentMostUsedWordsAndFrequency",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/data/comments_words/{stock_ticker}",
+			"/api/data/comments_words/{stock_ticker}",
 			c.GetStockCommentMostUsedWordsAndFrequency,
 		},
 		{
 			"GetStockCommentPerformance",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/data/comments_trend/{stock_ticker}",
+			"/api/data/comments_trend/{stock_ticker}",
 			c.GetStockCommentPerformance,
 		},
 		{
 			"GetStockFinancialPerformance",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/data/finance/{stock_ticker}",
+			"/api/data/finance/{stock_ticker}",
 			c.GetStockFinancialPerformance,
 		},
 		{
 			"GetStockVotesPerDayPerformance",
 			strings.ToUpper("Get"),
-			"/adchungcsc/gamestonks/1.0.0/data/votes_trend/{stock_ticker}",
+			"/api/data/votes_trend/{stock_ticker}",
 			c.GetStockVotesPerDayPerformance,
 		},
 	}
