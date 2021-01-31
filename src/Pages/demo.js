@@ -19,7 +19,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button } from 'react-bootstrap';
 import history from './history.js';
 import { TrendingUp } from '@material-ui/icons';
-import $ from "jquery"
+import $ from "jquery";
+import Chart from 'chart.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -103,6 +104,8 @@ export default function ScrollableTabsButtonForce() {
 
    }, [setData]);
 
+   let commentSection = undefined;
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="secondary" style={{backgroundColor: "pink"}}>
@@ -121,7 +124,7 @@ export default function ScrollableTabsButtonForce() {
            <Typography variant="h3" color="white">GameStonks</Typography>
           <Tab label="Trending" icon={<TrendingUp />} {...a11yProps(0)} />
           <Tab label="My Stocks" icon={<Assessment />} {...a11yProps(1)} />
-          <Tab label="Threads" icon={<Chat />} {...a11yProps(2)} />
+          <Tab label="Community" icon={<Chat />} {...a11yProps(2)} />
           
         </Tabs>
       </AppBar>
@@ -130,23 +133,41 @@ export default function ScrollableTabsButtonForce() {
       </TabPanel>
       <TabPanel value={value} index={1}>
       <div class="center dash"> 
-          <h5>Stocks</h5>
+      {/* <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new new Chart(ctx, {
+            data: data,
+            type: 'polarArea',
+            options: options
+        });
+        </script> */}
+          <h5> Trending Stocks</h5>
          {/* {data[0]} */}
          {data.map((input, key) => {
             return (
-              <div key={key}>
-                Test
-                {input.stock.ticker_symbol}
+              <div key={key} class ="rounded">
+                
+                <b>{input.stock.ticker_symbol}</b>
+                {input.comments && input.comments.map((input2, key2) => {
+                  return (
+                    <div key={key2} class="post">
+                      
+                      <user> <b>{input2.commenter}</b> </user> 
+                      <date> &nbsp; at {input2.date}</date> <br></br>
+                      {input2.comment} 
+                      
+                    </div>
+                  );
+                })}
+                
               </div>
+              
             );
           })}
+          <br></br>
+          
           <z><br></br></z> 
-
-          <div className={classes.root} class="line">
-            
-            <br />
-            <BorderLinearProgress variant="determinate" value={66} />
-          </div>
 
 
       </div>
@@ -154,27 +175,10 @@ export default function ScrollableTabsButtonForce() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div>
-                {/* Dropdown menu */}
-                <label for="cars">How many people have you seen in the last 2 weeks?</label>
-
-        <select name="cars" id="cars">
-        <option value="audi"></option>
-        <option value="volvo">1-2</option>
-        <option value="saab">3-5</option>
-        <option value="mercedes">6-8</option>
-        <option value="mercedes">9-12</option>
-        </select>
-
-        {/* Dropdown menu */}
-        <label for="cars"><br></br>How many restaurants have you been to in the last 2 weeks?</label>
-
-        <select name="cars" id="cars">
-        <option value="audi"></option>
-        <option value="volvo">1</option>
-        <option value="saab">2</option>
-        <option value="mercedes">3</option>
-        <option value="mercedes">4</option>
-        </select>
+        <b style={{ color: 'white' }}> Your Top Stocks </b>
+                <p style={{ color: 'white' }}> 1. GameStop 25.5%&#8679;</p>
+                <p style={{ color: 'white' }}> 2. Google 10.2%&#8679;</p>
+                <p style={{ color: 'white' }}> 3. Amazon 8.2%&#8681;</p>
 
         <p></p>
         <Button variant="btn btn-success" onClick={() => {history.push('/page3'); window.location.reload();}}>Enter</Button>

@@ -1,8 +1,9 @@
 h5 {
-    text-align: center;
-    margin: auto;
+    text-align: left;
+    /* margin: auto; */
     width: 50%;
     background-color: transparent;
+    color: darkslategrey;
 }
 .center {
     margin: auto;
@@ -17,3 +18,21 @@ h5 {
     
     background: transparent;
   }
+.post {
+  background: transparent;
+  background-color: white;
+  border-radius: 12px;
+  border-collapse: black;
+  border-style: solid;
+  border-color: teal;
+}
+user {
+  font-size: 20px;
+  /* font-weight: 10px; */
+}
+date {
+font-size: 15px;
+}
+.rounded {
+  border-radius: 12px;
+}
