@@ -28,8 +28,7 @@ div {
   /* example padding, font-size, background, etc */
   padding: 10px;
   font-size: 20px;
-  background: rgb(244,188,225);
-background: linear-gradient(90deg, rgba(244,188,225,1) 26%, rgba(20,179,244,1) 82%);
+  background: linear-gradient(45deg, rgba(105,223,216,100) 12%, rgba(170,214,209,100) 61%, rgba(111,226,178,100) 91%);
 }
 
 .center {

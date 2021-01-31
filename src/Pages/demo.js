@@ -99,7 +99,7 @@ export default function ScrollableTabsButtonForce() {
           textAlign='center'
           style={{backgroundColor: "pink"}}
         >
-           <Typography variant="h3" color="gray">GameStonks</Typography>
+           <Typography variant="h3" color="white">GameStonks</Typography>
           <Tab label="Trending" icon={<TrendingUp />} {...a11yProps(0)} />
           <Tab label="My Stocks" icon={<Assessment />} {...a11yProps(1)} />
           <Tab label="Threads" icon={<Chat />} {...a11yProps(2)} />

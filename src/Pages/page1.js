@@ -2,10 +2,12 @@ import './page1.css';
 import React from "react";
 import history from './history';
 import { Button } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import Login from './login';
 
 function Page1() {
 
-
+    ReactDOM.render(<Login />, document.querySelector('#root'));
     return (
         
         <div className = "page1">
