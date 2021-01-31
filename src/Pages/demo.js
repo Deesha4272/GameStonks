@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,6 +19,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button } from 'react-bootstrap';
 import history from './history.js';
 import { TrendingUp } from '@material-ui/icons';
+import $ from "jquery"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,10 +80,28 @@ const BorderLinearProgress = withStyles((theme) => ({
 export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const [data, setData] = React.useState([]);
+  console.log("...", data)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+
+      var settings = {
+        "url": "https://cors-anywhere.herokuapp.com/34.70.245.51:8080/api/stocks",
+        "method": "GET",
+        "timeout": 0,
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        console.log("useEffect being called, ajax");
+        setData(response)
+      });
+
+
+   }, [setData]);
 
   return (
     <div className={classes.root}>
@@ -103,7 +122,7 @@ export default function ScrollableTabsButtonForce() {
           <Tab label="Trending" icon={<TrendingUp />} {...a11yProps(0)} />
           <Tab label="My Stocks" icon={<Assessment />} {...a11yProps(1)} />
           <Tab label="Threads" icon={<Chat />} {...a11yProps(2)} />
-          />
+          
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -111,9 +130,17 @@ export default function ScrollableTabsButtonForce() {
       </TabPanel>
       <TabPanel value={value} index={1}>
       <div class="center dash"> 
-          <h5>Today's Covid Risk</h5>
-
-          <z>66%<br></br></z> 
+          <h5>Stocks</h5>
+         {/* {data[0]} */}
+         {data.map((input, key) => {
+            return (
+              <div key={key}>
+                Test
+                {input.stock.ticker_symbol}
+              </div>
+            );
+          })}
+          <z><br></br></z> 
 
           <div className={classes.root} class="line">
             
