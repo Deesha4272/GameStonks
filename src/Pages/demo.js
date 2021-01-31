@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Assessment from '@material-ui/icons/Assessment';
-import BubbleChart from '@material-ui/icons/BubbleChart';
+import BubbleChart from '@material-ui/icons/TrendingUp';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
-import Healing from '@material-ui/icons/Healing';
+import Chat from '@material-ui/icons/Chat';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
@@ -18,6 +18,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from 'react-bootstrap';
 import history from './history.js';
+import { TrendingUp } from '@material-ui/icons';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -98,10 +99,10 @@ export default function ScrollableTabsButtonForce() {
           textAlign='center'
           style={{backgroundColor: "pink"}}
         >
-           <Typography variant="h3" color="gray">MyBubble</Typography>
-          <Tab label="Score" icon={<Assessment />} {...a11yProps(0)} />
-          <Tab label="MyBubble" icon={<BubbleChart />} {...a11yProps(1)} />
-          <Tab label="Hotspots" icon={<Healing />} {...a11yProps(2)} />
+           <Typography variant="h3" color="gray">GameStonks</Typography>
+          <Tab label="Trending" icon={<TrendingUp />} {...a11yProps(0)} />
+          <Tab label="My Stocks" icon={<Assessment />} {...a11yProps(1)} />
+          <Tab label="Threads" icon={<Chat />} {...a11yProps(2)} />
           />
         </Tabs>
       </AppBar>
