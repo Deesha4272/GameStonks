@@ -1,0 +1,38 @@
+.page1 {
+    color: white;
+}
+
+/* override browser default */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* use viewport-relative units to cover page fully */
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* include border and padding in element width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* full-sized  container that fills up the page */
+div {
+  height: 100%;
+  width: 100%;
+
+  /* example padding, font-size, background, etc */
+  padding: 10px;
+  font-size: 20px;
+  background: rgb(41,230,215);
+  background: linear-gradient(90deg, rgba(41,230,215,1) 12%, rgba(20,179,244,1) 61%, rgba(108,115,242,1) 91%);
+}
+
+.center {
+    padding: 200px 0;
+    text-align: center;
+  }
