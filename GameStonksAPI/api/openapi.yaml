@@ -1,0 +1,301 @@
+openapi: 3.0.0
+info:
+  description: |
+    GameStonks API
+  title: API for interacting with GameStonks
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: https://github.com/adchungcsc/GameStonks
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/adchungcsc/gamestonks/1.0.0
+tags:
+- description: Data about stocks
+  name: data
+- description: Stocks
+  name: stock
+paths:
+  /data/finance/{stock_ticker}:
+    get:
+      description: Gets stock finance performance data
+      operationId: getStockFinancialPerformance
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Gets stock finance performance data
+      tags:
+      - data
+  /data/votes_trend/{stock_ticker}:
+    get:
+      description: Gets votes per day trend from a stock
+      operationId: getStockVotesPerDayPerformance
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: starting date to get stocks from.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: end date to get stocks from.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Gets votes per day trend from a stock
+      tags:
+      - data
+  /data/comments_trend/{stock_ticker}:
+    get:
+      description: Gets stock comments per day trend
+      operationId: getStockCommentPerformance
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: starting date to get stocks from.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: end date to get stocks from.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Gets stock comments per day trend
+      tags:
+      - data
+  /data/comments_words/{stock_ticker}:
+    get:
+      description: Get most used words in comments for a given stock
+      operationId: getStockCommentMostUsedWordsAndFrequency
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Get most used words in comments for a given stock
+      tags:
+      - data
+  /data/most_voted:
+    get:
+      description: Gets all stocks on the platform within a date range
+      operationId: getMostVoted
+      parameters:
+      - description: floor of votes count to find.
+        explode: true
+        in: query
+        name: vote_floor
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: starting date to get stocks from.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: end date to get stocks from.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Gets all stocks on the platform within a date range
+      tags:
+      - data
+  /stocks:
+    get:
+      description: Gets all stocks on the platform within a date range
+      operationId: getAllStocks
+      parameters:
+      - description: starting date to get stocks from.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: end date to get stocks from.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: unsuccessful operation
+      summary: Gets all stocks on the platform within a date range
+      tags:
+      - stock
+  /stock/{stock_ticker}:
+    get:
+      description: Returns a stock's vote count and comments
+      operationId: getIndividualStock
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  format: int32
+                  type: integer
+                type: object
+          description: successful operation
+        "404":
+          description: not found
+      summary: Returns a stock's vote count and comments
+      tags:
+      - stock
+    post:
+      description: Create a new stock ticker for tracking
+      operationId: insertIndividualStock
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          description: successful operation
+        "400":
+          description: failure
+      summary: Create a new stock ticker for tracking
+      tags:
+      - stock
+  /stock/vote/{stock_ticker}:
+    put:
+      description: Add a vote to a stock
+      operationId: addNewVote
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          description: successful operation
+        "404":
+          description: not found
+      summary: Add a vote to a stock
+      tags:
+      - stock
+  /stock/comment/{stock_ticker}:
+    put:
+      description: Add a comment to a stock
+      operationId: addNewComment
+      parameters:
+      - description: ID of stock that needs to be fetched
+        explode: false
+        in: path
+        name: stock_ticker
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          description: successful operation
+        "404":
+          description: ticker not found
+      summary: Add a comment to a stock
+      tags:
+      - stock
+components:
+  schemas: {}
